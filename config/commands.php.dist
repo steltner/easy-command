@@ -1,0 +1,15 @@
+<?php declare(strict_types=1);
+
+namespace Easy\Command;
+
+return [
+    'commands' => [
+        new BehatCommand(),
+        new CodeSnifferCommand(),
+        new DatabaseCommand(),
+        new DockerCommand(),
+        new MessDetectorCommand(),
+        new PhpUnitCommand(),
+        new WebserverCommand(),
+    ],
+];

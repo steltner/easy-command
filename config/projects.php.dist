@@ -1,0 +1,37 @@
+<?php declare(strict_types=1);
+
+return [
+    'projects' => [
+        // first one is default and will be used if you do not add optional parameter project
+        [
+            // required, names to call this project
+            'names' => ['easy', 'easy-command'],
+            // required, project name/path relative to parent of ROOT
+            'path' => 'easy-command',
+            'docker' => [
+                // to use DockerCommand - this is default
+                'config' => 'docker-compose.yml',
+                // @TODO not implemented in public version for now
+                // to redirect calls and use them from inside docker, especially for DatabaseCommand
+                'container' => 'easy-command',
+                'path' => '/var/www/html/easy-command',
+            ],
+            // path to configuration inside project, phpunit.xml
+            'phpunit' => 'tests/phpunit.xml',
+            // path to configuration inside project, default behat.yml
+            'behat' => 'tests/behat.yml',
+            // optional
+            'phpmd' => [
+                'target' => 'src',
+                'format' => 'text',
+                'ruleset' => 'codesize,controversial,design,naming,unusedcode',
+            ],
+            // @TODO not implemented in public version for now
+            // to auto update projects with UpdateCommand
+            'repository' => [
+                'branch' => 'master',
+                'origin' => 'https://github.com/steltner/easy-template.git',
+            ]
+        ],
+    ]
+];

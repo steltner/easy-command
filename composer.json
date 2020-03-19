@@ -1,0 +1,47 @@
+{
+    "name": "geste/easy-command",
+    "description": "gestes cli template based on symfony console",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Georg Steltner",
+            "email": "georg.steltner@gmail.com"
+        }
+    ],
+    "config": {
+        "process-timeout" : 0,
+        "sort-packages": true
+    },
+    "require": {
+        "php": "^7.2",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-pdo": "*",
+        "behat/behat": "^3.6",
+        "envms/fluentpdo": "^2.1",
+        "guzzlehttp/guzzle": "6.3.*",
+        "imbo/behat-api-extension": "^2.1",
+        "laminas/laminas-config-aggregator": "^1.0",
+        "laminas/laminas-servicemanager": "^3.3",
+        "phpmd/phpmd" : "@stable",
+        "phpunit/phpunit": "^8",
+        "squizlabs/php_codesniffer": "3.*",
+        "symfony/console": "*",
+        "symfony/http-foundation": "^4.2",
+        "symfony/process": "*"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-4": {
+            "Easy\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Easy\\": "tests/phpunit",
+            "Behat\\": "tests/behat"
+        }
+    },
+    "bin": ["bin/easy"]
+}

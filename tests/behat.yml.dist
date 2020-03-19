@@ -1,0 +1,9 @@
+default:
+  suites:
+    default:
+      filters:
+        tags: '~@skip'
+      paths:
+        - ./behat/features
+      contexts:
+          - Easy\ApiContext:

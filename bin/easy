@@ -1,0 +1,42 @@
+#!/usr/bin/env php
+<?php
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+set_time_limit(0);
+
+foreach (
+    [
+        __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'autoload.php',
+        __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php',
+        __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'autoload.php',
+    ] as $autoloader
+) {
+    if (file_exists($autoloader)) {
+        require $autoloader;
+
+        break;
+    }
+}
+
+(function () {
+    require __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'const.php';
+
+    $config = require EASY_CONFIG . 'config.php';
+
+    $dependencies = $config['dependencies'];
+    unset($config['dependencies']);
+
+    $commands = $config['commands'];
+    unset($config['commands']);
+
+    $dependencies['services']['config'] = $config;
+
+    $container = new Laminas\ServiceManager\ServiceManager($dependencies);
+
+    (new Easy\Application($container, 'easy command'))
+        ->addCommands($commands)
+        ->run();
+})();
