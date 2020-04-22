@@ -27,7 +27,7 @@ class WebserverCommand extends AbstractCommand
         $projectPath = $this->getFilePath($project['path']);
 
         $path = $project['webserver']['path'] ?? 'public';
-        $port = $project['phpmd']['port'] ?? '8000';
+        $port = $project['webserver']['port'] ?? '8000';
 
         $this->executeCommand(
             [
