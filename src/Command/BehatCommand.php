@@ -31,10 +31,10 @@ class BehatCommand extends AbstractCommand
 
         $filePath = $project['behat'] ?? 'behat.yml';
 
-        if ($this->distFileExists($project['path'], $filePath)) {
-            $file = $this->getDistFilePath($project['path'], $filePath);
-        } elseif ($this->fileExists($project['path'], $filePath)) {
+        if ($this->fileExists($project['path'], $filePath)) {
             $file = $this->getFilePath($project['path'], $filePath);
+        } elseif ($this->distFileExists($project['path'], $filePath)) {
+            $file = $this->getDistFilePath($project['path'], $filePath);
         } else {
             $output->writeln('No behat configuration');
 
