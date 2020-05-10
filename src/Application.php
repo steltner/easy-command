@@ -3,6 +3,7 @@
 namespace Easy;
 
 use BadMethodCallException;
+use Easy\Service\CommandListService;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Application as SymfonyApplication;
 
@@ -11,12 +12,13 @@ use function is_callable;
 
 class Application extends SymfonyApplication
 {
-    /** @var ContainerInterface */
-    private $container;
+    private ContainerInterface $container;
 
     public function __construct(ContainerInterface $container, string $name = 'UNKNOWN', string $version = 'UNKNOWN')
     {
         $this->container = $container;
+
+        $this->addCommands(($this->container->get(CommandListService::class))());
 
         parent::__construct($name, $version);
     }
@@ -44,12 +46,5 @@ class Application extends SymfonyApplication
         }
 
         throw new BadMethodCallException("Method $method is not a valid method");
-    }
-
-    public function addCommands(array $commands): self
-    {
-        parent::addCommands($commands);
-
-        return $this;
     }
 }
