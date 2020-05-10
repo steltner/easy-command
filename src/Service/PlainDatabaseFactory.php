@@ -7,7 +7,7 @@ use Psr\Container\ContainerInterface;
 
 use function current;
 
-class PdoFactory
+class PlainDatabaseFactory
 {
     public function __invoke(ContainerInterface $container): PDO
     {

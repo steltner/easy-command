@@ -2,6 +2,7 @@
 
 namespace Easy;
 
+use Envms\FluentPDO\Query;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 use PDO;
 
@@ -21,15 +22,17 @@ class ConfigProvider
             ],
             'dependencies' => [
                 'aliases' => [
-                    PDO::class => 'pdo',
+                    PDO::class => 'database',
+                    Query::class => 'query',
                 ],
                 'invokables' => [
                     Service\CommandResolver::class,
                 ],
                 'factories' => [
                     'database' => Service\DatabaseFactory::class,
-                    'pdo' => Service\PdoFactory::class,
                     'query' => Service\QueryFactory::class,
+
+                    'plainDatabase' => Service\PlainDatabaseFactory::class,
 
                     Service\CommandListService::class => ConfigAbstractFactory::class,
                 ],

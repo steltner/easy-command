@@ -73,7 +73,7 @@ class DatabaseCommand extends AbstractCommand
 
     private function delete(string $database, OutputInterface $output): void
     {
-        $pdo = $this->getContainer()->get('pdo');
+        $pdo = $this->get('plainDatabase');
 
         $output->writeln('DROP database `' . $database . '`');
 
@@ -82,7 +82,7 @@ class DatabaseCommand extends AbstractCommand
 
     private function install(string $database, OutputInterface $output, bool $dev = true): void
     {
-        $pdo = $this->getContainer()->get('pdo');
+        $pdo = $this->get('plainDatabase');
 
         $filename = $this->getPathForDatabase($database) . 'structure' . DS . 'structure' . PS . 'sql';
 
@@ -98,7 +98,7 @@ class DatabaseCommand extends AbstractCommand
         $output->writeln('Start migrations');
 
         /** @var \PDO $pdo */
-        $pdo = $this->get('pdo');
+        $pdo = $this->get('plainDatabase');
 
         $path = $this->getPathForDatabase($database) . 'migration' . DS;
 
@@ -142,7 +142,7 @@ class DatabaseCommand extends AbstractCommand
     private function insertData(string $database, OutputInterface $output, bool $dev = true): void
     {
         /** @var PDO $pdo */
-        $pdo = $this->get('pdo');
+        $pdo = $this->get('plainDatabase');
 
         $system = $dev ? 'dev' : 'live';
 
