@@ -1,6 +1,6 @@
 {
     "name": "geste/easy-command",
-    "description": "gestes cli template based on symfony console",
+    "description": "gestes cli template based on symfony console and laminas container",
     "type": "library",
     "authors": [
         {

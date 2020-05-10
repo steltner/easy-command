@@ -2,7 +2,14 @@
 
 return [
     'database' => [
-        [
+        'development' => [
+            'host' => '127.0.0.1',
+            'user' => 'root',
+            'password' => 'root',
+            'name' => 'name',
+            'error' => PDO::ERRMODE_EXCEPTION,
+        ],
+        'production' => [
             'host' => '127.0.0.1',
             'user' => 'root',
             'password' => 'root',

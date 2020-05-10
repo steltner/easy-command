@@ -15,8 +15,8 @@
     
 ### Add own commands
     Just see for examples in src/Command/
-    Add new command to config/commands.php
-
+    Add new commands in ConfigProviders with key 'commands'
+    
 ### Use database command 
     Add config in config/database.php 
     Rename database/{name}/
