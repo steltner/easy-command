@@ -12,13 +12,19 @@
         "process-timeout" : 0,
         "sort-packages": true
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/steltner/fluentpdo.git"
+        }
+    ],
     "require": {
         "php": "^7.4",
         "ext-curl": "*",
         "ext-json": "*",
         "ext-pdo": "*",
         "behat/behat": "^3.6",
-        "envms/fluentpdo": "^2.1",
+        "geste/fluentpdo": "^3",
         "guzzlehttp/guzzle": "6.3.*",
         "imbo/behat-api-extension": "^2.1",
         "laminas/laminas-config-aggregator": "^1.0",
