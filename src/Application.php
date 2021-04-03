@@ -45,6 +45,6 @@ class Application extends SymfonyApplication
             }
         }
 
-        throw new BadMethodCallException("Method $method is not a valid method");
+        throw new BadMethodCallException('Method ' . $method . ' is not a valid method');
     }
 }
