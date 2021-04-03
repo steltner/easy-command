@@ -33,7 +33,7 @@ class WebserverCommand extends AbstractCommand
             [
                 'php',
                 '-S',
-                '0.0.0.0:' . $port,
+                'localhost:' . $port,
                 '-t' . $projectPath . $path,
             ]
         );
