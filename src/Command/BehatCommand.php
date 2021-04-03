@@ -3,13 +3,9 @@
 namespace Easy\Command;
 
 use Symfony\Component\Console\Input\InputOption;
-use function array_flip;
-use function strtolower;
-
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Process\Process;
+
 use const DS;
 
 class BehatCommand extends AbstractCommand
