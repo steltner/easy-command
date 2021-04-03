@@ -12,14 +12,8 @@
         "process-timeout" : 0,
         "sort-packages": true
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/steltner/fluentpdo.git"
-        }
-    ],
     "require": {
-        "php": "^7.4",
+        "php": ">=8",
         "ext-curl": "*",
         "ext-json": "*",
         "ext-pdo": "*",
