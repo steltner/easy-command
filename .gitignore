@@ -1,7 +1,6 @@
 config/*.php
 !config/config.php
 
-composer.lock
 .idea/
 phpcs.xml
 tests/behat.yml
