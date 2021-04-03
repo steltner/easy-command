@@ -8,10 +8,12 @@
             <directory>.</directory>
         </testsuite>
     </testsuites>
-
-    <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">.</directory>
-        </whitelist>
-    </filter>
+    <coverage processUncoveredFiles="true">
+        <report>
+            <text outputFile="../build/coverage/report"/>
+        </report>
+        <include>
+            <directory suffix=".php">../src</directory>
+        </include>
+    </coverage>
 </phpunit>

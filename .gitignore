@@ -1,6 +1,7 @@
 config/*.php
 !config/config.php
 
+build/
 .idea/
 phpcs.xml
 tests/behat.yml
