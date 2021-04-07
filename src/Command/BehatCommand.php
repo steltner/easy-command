@@ -40,7 +40,7 @@ class BehatCommand extends AbstractCommand
         $projectPath = $this->getFilePath($project['path']);
 
         $this->executeCommand(
-            ['php', $projectPath . 'vendor' . DS . 'behat' . DS . 'behat' . DS . 'bin' . DS . 'behat', '--config=' . $file]
+            ['php', $projectPath . 'vendor' . DS . 'behat' . DS . 'behat' . DS . 'bin' . DS . 'behat', '--config=' . $file, '--colors']
         );
 
         return 0;
