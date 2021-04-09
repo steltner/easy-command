@@ -4,14 +4,13 @@ namespace Easy;
 
 use Easy\Service\CommandListService;
 use Laminas\ServiceManager\ServiceManager;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class ApplicationTest extends TestCase
 {
     public function testCreation(): void
     {
-        $serviceManager = $this->createServiceManagerMock();
+        $serviceManager = $this->createMock(ServiceManager::class);
 
         $serviceManager->expects($this->once())
             ->method('get')
@@ -23,15 +22,5 @@ class ApplicationTest extends TestCase
         $instance = new Application($serviceManager);
 
         $this->assertInstanceOf(Application::class, $instance);
-    }
-
-    /**
-     * @return ServiceManager|MockObject
-     */
-    private function createServiceManagerMock(): ServiceManager
-    {
-        return $this->getMockBuilder(ServiceManager::class)
-            ->disableOriginalConstructor()
-            ->getMock();
     }
 }

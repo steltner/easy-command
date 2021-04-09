@@ -6,17 +6,13 @@ namespace Easy\Service;
 
 class CommandListService
 {
-    private CommandResolver $resolver;
-    private array $commands;
-
-    public function __construct(array $config, CommandResolver $resolver)
+    public function __construct(private array $config, private CommandResolver $resolver)
     {
-        $this->commands = $config['commands'];
-        $this->resolver = $resolver;
+        $this->config = $config['commands'];
     }
 
     public function __invoke(): array
     {
-        return $this->resolver->resolveList($this->commands);
+        return $this->resolver->resolveList($this->config);
     }
 }

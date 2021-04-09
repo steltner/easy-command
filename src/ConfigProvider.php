@@ -6,6 +6,9 @@ use Envms\FluentPDO\Query;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 use PDO;
 
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ */
 class ConfigProvider
 {
     public function __invoke(): array

@@ -16,11 +16,11 @@ class CommandResolver
     }
 
     /**
-     * @param string|callable $item
+     * @param callable|string $item
      * @return callable
      * @throws InvalidArgumentException
      */
-    public function resolve($item): AbstractCommand
+    public function resolve(callable|string $item): AbstractCommand
     {
         if (is_callable($item)) {
             return $item;

@@ -12,12 +12,8 @@ use function is_callable;
 
 class Application extends SymfonyApplication
 {
-    private ContainerInterface $container;
-
-    public function __construct(ContainerInterface $container, string $name = 'UNKNOWN', string $version = 'UNKNOWN')
+    public function __construct(private ContainerInterface $container, string $name = 'UNKNOWN', string $version = 'UNKNOWN')
     {
-        $this->container = $container;
-
         $this->addCommands(($this->container->get(CommandListService::class))());
 
         parent::__construct($name, $version);
