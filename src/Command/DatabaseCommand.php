@@ -27,7 +27,7 @@ use const ROOT;
 
 class DatabaseCommand extends AbstractCommand
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('database')
@@ -97,7 +97,7 @@ class DatabaseCommand extends AbstractCommand
     {
         $output->writeln('Start migrations');
 
-        /** @var \PDO $pdo */
+        /** @var PDO $pdo */
         $pdo = $this->get('plainDatabase');
 
         $path = $this->getPathForDatabase($database) . 'migration' . DS;
@@ -130,7 +130,7 @@ class DatabaseCommand extends AbstractCommand
 
                 $this->insertSqlFile($output, $pdo, $path . $file);
 
-                $statement = $pdo->prepare("INSERT INTO Migration (name, executionTime) VALUES (?, ?)");
+                $statement = $pdo->prepare('INSERT INTO Migration (name, executionTime) VALUES (?, ?)');
 
                 $result = $statement->execute([$file, time()]);
 

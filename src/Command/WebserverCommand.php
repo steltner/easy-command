@@ -8,7 +8,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class WebserverCommand extends AbstractCommand
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('webserver')

@@ -8,7 +8,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class MessDetectorCommand extends AbstractCommand
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('mess-detector')

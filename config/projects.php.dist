@@ -6,16 +6,15 @@ return [
         [
             // required, names to call this project
             'names' => ['easy', 'easy-command'],
-            // required, project name/path relative to parent of ROOT
+            // required, project name/path relative to parent of ROOT or absolute path
             'path' => 'easy-command',
-            'docker' => [
-                // to use DockerCommand - this is default
-                'config' => 'docker-compose.yml',
-                // @TODO not implemented in public version for now
-                // to redirect calls and use them from inside docker, especially for DatabaseCommand
-                'container' => 'easy-command',
-                'path' => '/var/www/html/easy-command',
-            ],
+//            'docker' => [
+//                // to use DockerCommand - this is default
+//                'config' => 'docker-compose.yml',
+//                // to redirect calls and use them from inside docker, especially for DatabaseCommand
+//                'container' => 'easy-command',
+//                'path' => '/var/www/html/easy-command',
+//            ],
             // path to configuration inside project, phpunit.xml
             'phpunit' => 'tests/phpunit.xml',
             // path to configuration inside project, default behat.yml

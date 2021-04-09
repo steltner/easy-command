@@ -8,7 +8,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CodeSnifferCommand extends AbstractCommand
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('code-sniffer')

@@ -12,7 +12,7 @@ use function strtolower;
 
 class DockerCommand extends AbstractCommand
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('docker')

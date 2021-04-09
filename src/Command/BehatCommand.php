@@ -19,7 +19,7 @@ class BehatCommand extends AbstractCommand
             ->addOption('project', 'p', InputOption::VALUE_OPTIONAL, 'Project name or short tag');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $project = $input->getOption('project');
 
