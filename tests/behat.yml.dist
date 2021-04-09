@@ -6,4 +6,4 @@ default:
       paths:
         - ./behat/features
       contexts:
-          - Easy\ApiContext:
+          - Behat\ApiContext:
