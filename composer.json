@@ -18,7 +18,7 @@
         "ext-json": "*",
         "ext-pdo": "*",
         "behat/behat": "^3.6",
-        "geste/fluentpdo": "^3",
+        "geste/fluentpdo": "^4",
         "guzzlehttp/guzzle": "6.3.*",
         "imbo/behat-api-extension": "^2.1",
         "laminas/laminas-config-aggregator": "^1.0",
