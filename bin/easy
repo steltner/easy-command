@@ -32,6 +32,7 @@ foreach (
     $dependencies['services']['config'] = $config;
 
     $container = new Laminas\ServiceManager\ServiceManager($dependencies);
+    $container->setService(Psr\Container\ContainerInterface::class, $container);
 
     (new Easy\Application($container, 'easy command'))->run();
 })();

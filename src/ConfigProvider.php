@@ -5,6 +5,7 @@ namespace Easy;
 use Envms\FluentPDO\Query;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 use PDO;
+use Psr\Container\ContainerInterface;
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
@@ -29,7 +30,13 @@ class ConfigProvider
                     Query::class => 'query',
                 ],
                 'invokables' => [
-                    Service\CommandResolver::class,
+                    Command\BehatCommand::class,
+                    Command\CodeSnifferCommand::class,
+                    Command\DatabaseCommand::class,
+                    Command\DockerCommand::class,
+                    Command\MessDetectorCommand::class,
+                    Command\PhpUnitCommand::class,
+                    Command\WebserverCommand::class,
                 ],
                 'factories' => [
                     'database' => Service\DatabaseFactory::class,
@@ -38,6 +45,8 @@ class ConfigProvider
                     'plainDatabase' => Service\PlainDatabaseFactory::class,
 
                     Service\CommandListService::class => ConfigAbstractFactory::class,
+
+                    Service\CommandResolver::class => ConfigAbstractFactory::class,
                 ],
             ],
             ConfigAbstractFactory::class => [
@@ -45,7 +54,10 @@ class ConfigProvider
                     'config',
                     Service\CommandResolver::class,
                 ],
-            ]
+                Service\CommandResolver::class => [
+                    ContainerInterface::class,
+                ],
+            ],
         ];
     }
 }

@@ -4,30 +4,32 @@ namespace Easy\Service;
 
 use Easy\Command\AbstractCommand;
 use InvalidArgumentException;
+use Psr\Container\ContainerInterface;
 
 use function array_map;
-use function is_callable;
 
 class CommandResolver
 {
+    public function __construct(private ContainerInterface $container)
+    {
+    }
+
     public function resolveList(array $items): array
     {
         return array_map([$this, 'resolve'], $items);
     }
 
     /**
-     * @param callable|string $item
-     * @return callable
+     * @param string $item
+     * @return AbstractCommand
      * @throws InvalidArgumentException
      */
-    public function resolve(callable|string $item): AbstractCommand
+    public function resolve(string $item): AbstractCommand
     {
-        if (is_callable($item)) {
-            return $item;
-        } elseif (class_exists($item)) {
-            return new $item();
-        } else {
+        if (!$this->container->has($item)) {
             throw new InvalidArgumentException();
         }
+
+        return $this->container->get($item);
     }
 }
