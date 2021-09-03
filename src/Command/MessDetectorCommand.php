@@ -40,6 +40,8 @@ class MessDetectorCommand extends AbstractCommand
             ]
         );
 
+        $output->writeln('- Mess detector done -');
+
         return 0;
     }
 }
