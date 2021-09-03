@@ -2,6 +2,7 @@
 
 namespace Easy\Command;
 
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -16,12 +17,14 @@ class BehatCommand extends AbstractCommand
             ->setName('behat')
             ->setDescription('Start behat tests')
             ->setHelp('Start behat tests')
+            ->addArgument('tags', InputArgument::OPTIONAL, 'Tags')
             ->addOption('project', 'p', InputOption::VALUE_OPTIONAL, 'Project name or short tag');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $project = $input->getOption('project');
+        $tags = $input->getArgument('tags');
 
         $project = $this->getProjectByName($project);
 
@@ -39,9 +42,13 @@ class BehatCommand extends AbstractCommand
 
         $projectPath = $this->getFilePath($project['path']);
 
-        $this->executeCommand(
-            ['php', $projectPath . 'vendor' . DS . 'behat' . DS . 'behat' . DS . 'bin' . DS . 'behat', '--config=' . $file, '--colors']
-        );
+        $command = ['php', $projectPath . 'vendor' . DS . 'behat' . DS . 'behat' . DS . 'bin' . DS . 'behat', '--config=' . $file, '--colors'];
+
+        if ($tags) {
+            $command[] = '--tags=' . $tags;
+        }
+
+        $this->executeCommand($command);
 
         return 0;
     }
