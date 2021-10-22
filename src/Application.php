@@ -29,10 +29,10 @@ class Application extends SymfonyApplication
      * in the container that is callable and if so, calls it.
      *
      * @param string $method
-     * @param $args
+     * @param array $args
      * @return mixed
      */
-    public function __call(string $method, $args)
+    public function __call(string $method, array $args)
     {
         if ($this->container->has($method)) {
             $obj = $this->container->get($method);

@@ -22,6 +22,7 @@ class ConfigProvider
                 Command\DockerCommand::class,
                 Command\MessDetectorCommand::class,
                 Command\PhpUnitCommand::class,
+                Command\PhpStanCommand::class,
                 Command\WebserverCommand::class,
             ],
             'dependencies' => [
@@ -36,6 +37,7 @@ class ConfigProvider
                     Command\DockerCommand::class,
                     Command\MessDetectorCommand::class,
                     Command\PhpUnitCommand::class,
+                    Command\PhpStanCommand::class,
                     Command\WebserverCommand::class,
                 ],
                 'factories' => [
