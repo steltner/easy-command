@@ -63,7 +63,7 @@ class PhpStanCommand extends AbstractCommand
 
         return [
             'docker', 'exec', '-i', $docker['container'], 'bash', '-c',
-            '(cd ' . $projectPath . ' && ' . 'php', 'vendor' .DS . 'phpstan' . DS . 'phpstan' . DS . 'phpstan', 'analyze', '-c', $file . ')'
+            '(cd ' . $projectPath . ' && ' . 'php', 'vendor' . DS . 'phpstan' . DS . 'phpstan' . DS . 'phpstan', 'analyze', '-c', $file . ')',
         ];
     }
 
