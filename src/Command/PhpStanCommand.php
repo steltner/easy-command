@@ -58,7 +58,7 @@ class PhpStanCommand extends AbstractCommand
         } elseif ($this->distFileExists($path, $filePath)) {
             $file = str_replace('//', '/', $projectPath . DS . $filePath . PS . 'dist');
         } else {
-            throw new Exception('No valid phpunit configuration');
+            throw new Exception('No valid phpstan configuration');
         }
 
         return [
@@ -74,7 +74,7 @@ class PhpStanCommand extends AbstractCommand
         } elseif ($this->distFileExists($path, $filePath)) {
             $file = $this->getDistFilePath($path, $filePath);
         } else {
-            throw new Exception('No valid phpunit configuration');
+            throw new Exception('No valid phpstan configuration');
         }
 
         $projectPath = $this->getFilePath($path);
