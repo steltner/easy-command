@@ -22,7 +22,7 @@ foreach (
 }
 
 (function () {
-    require __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'const.php';
+    require __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'bootstrap.php';
 
     $config = require CONFIG . 'config.php';
 

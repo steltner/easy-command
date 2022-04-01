@@ -9,16 +9,13 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-
 use function current;
 use function file;
 use function glob;
 use function pathinfo;
 use function sort;
-use function substr;
 use function time;
 use function trim;
-
 use const DS;
 use const PATHINFO_BASENAME;
 use const PHP_EOL;
@@ -27,6 +24,11 @@ use const ROOT;
 
 class DatabaseCommand extends AbstractCommand
 {
+    public function __construct(private PDO $pdo, private array $config)
+    {
+        parent::__construct();
+    }
+
     protected function configure(): void
     {
         $this
@@ -44,7 +46,7 @@ class DatabaseCommand extends AbstractCommand
     {
         $action = $input->getArgument('action');
 
-        $database = $input->getArgument('database') ?? current($this->getContainer()->get('config')['database'])['name'];
+        $database = $input->getArgument('database') ?? current($this->config)['name'];
 
         $dev = $input->getOption('live') === false;
 
@@ -73,21 +75,17 @@ class DatabaseCommand extends AbstractCommand
 
     private function delete(string $database, OutputInterface $output): void
     {
-        $pdo = $this->get('plainDatabase');
-
         $output->writeln('DROP database `' . $database . '`');
 
-        $pdo->exec('DROP DATABASE IF EXISTS `' . $database . '`');
+        $this->pdo->exec('DROP DATABASE IF EXISTS `' . $database . '`');
     }
 
     private function install(string $database, OutputInterface $output, bool $dev = true): void
     {
-        $pdo = $this->get('plainDatabase');
-
         $filename = $this->getPathForDatabase($database) . 'structure' . DS . 'structure' . PS . 'sql';
 
         $output->writeln('Insert database structure for ' . $database);
-        $this->insertSqlFile($output, $pdo, $filename);
+        $this->insertSqlFile($output, $filename);
 
         $output->writeln('Insert database data for ' . $database);
         $this->insertData($database, $output, $dev);
@@ -97,9 +95,6 @@ class DatabaseCommand extends AbstractCommand
     {
         $output->writeln('Start migrations');
 
-        /** @var PDO $pdo */
-        $pdo = $this->get('plainDatabase');
-
         $path = $this->getPathForDatabase($database) . 'migration' . DS;
 
         $migrations = [];
@@ -108,9 +103,9 @@ class DatabaseCommand extends AbstractCommand
             $migrations[] = pathinfo($filename, PATHINFO_BASENAME);
         }
 
-        $pdo->exec('use ' . $database);
+        $this->pdo->exec('use ' . $database);
 
-        $pdoStatement = $pdo->prepare('SELECT * FROM Migration ORDER BY name');
+        $pdoStatement = $this->pdo->prepare('SELECT * FROM Migration ORDER BY name');
         $pdoStatement->execute();
         $result = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
 
@@ -128,9 +123,9 @@ class DatabaseCommand extends AbstractCommand
             if (!isset($databaseMigrations[$file])) {
                 $output->write('Insert file ' . $file);
 
-                $this->insertSqlFile($output, $pdo, $path . $file);
+                $this->insertSqlFile($output, $path . $file);
 
-                $statement = $pdo->prepare('INSERT INTO Migration (name, executionTime) VALUES (?, ?)');
+                $statement = $this->pdo->prepare('INSERT INTO Migration (name, executionTime) VALUES (?, ?)');
 
                 $result = $statement->execute([$file, time()]);
 
@@ -141,33 +136,30 @@ class DatabaseCommand extends AbstractCommand
 
     private function insertData(string $database, OutputInterface $output, bool $dev = true): void
     {
-        /** @var PDO $pdo */
-        $pdo = $this->get('plainDatabase');
-
         $system = $dev ? 'dev' : 'live';
 
         $filename = $this->getPathForDatabase($database) . 'data' . DS . $system . PS . 'sql';
 
-        $this->insertSqlFile($output, $pdo, $filename);
+        $this->insertSqlFile($output, $filename);
     }
 
-    private function insertSqlFile(OutputInterface $output, PDO $pdo, string $filename): void
+    private function insertSqlFile(OutputInterface $output, string $filename): void
     {
         $temp = '';
         $lines = file($filename);
 
         foreach ($lines as $line) {
             // Skip it if it is a comment
-            if (substr($line, 0, 2) === '--' || $line == '') {
+            if (str_starts_with($line, '--') || $line == '') {
                 continue;
             }
 
             // Add this line to the current segment
             $temp .= $line;
             // If it has a semicolon at the end, it's the end of the query
-            if (substr(trim($line), -1, 1) == ';') {
+            if (str_ends_with(trim($line), ';')) {
                 try {
-                    $pdo->exec($temp);
+                    $this->pdo->exec($temp);
                     $temp = '';
                 } catch (Exception $e) {
                     $output->writeln(PHP_EOL . 'MySQLError ' . $e->getMessage());

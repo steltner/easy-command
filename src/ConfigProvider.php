@@ -33,7 +33,6 @@ class ConfigProvider
                 'invokables' => [
                     Command\BehatCommand::class,
                     Command\CodeSnifferCommand::class,
-                    Command\DatabaseCommand::class,
                     Command\DockerCommand::class,
                     Command\MessDetectorCommand::class,
                     Command\PhpUnitCommand::class,
@@ -49,6 +48,8 @@ class ConfigProvider
                     Service\CommandListService::class => ConfigAbstractFactory::class,
 
                     Service\CommandResolver::class => ConfigAbstractFactory::class,
+
+                    Command\DatabaseCommand::class => ConfigAbstractFactory::class,
                 ],
             ],
             ConfigAbstractFactory::class => [
@@ -58,6 +59,11 @@ class ConfigProvider
                 ],
                 Service\CommandResolver::class => [
                     ContainerInterface::class,
+                ],
+
+                Command\DatabaseCommand::class => [
+                    'plainDatabase',
+                    'config.database',
                 ],
             ],
         ];

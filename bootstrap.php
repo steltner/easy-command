@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-define('DS', DIRECTORY_SEPARATOR);
-define('PS', '.');
+const DS = DIRECTORY_SEPARATOR;
+const PS = '.';
 
-define('EASY_ROOT', realpath(__DIR__ . DS . '..') . DS);
+const EASY_ROOT = __DIR__ . DS;
 
-define('EASY_CONFIG', EASY_ROOT . 'config' . DS);
+const EASY_CONFIG = EASY_ROOT . 'config' . DS;
 
 define('EASY_LIB', file_exists(EASY_ROOT . '..' . DS . '..' . DS . '..' . DS . 'vendor' . DS . 'geste' . DS . 'easy-command'));
 

@@ -27,7 +27,7 @@ class CommandResolver
     public function resolve(string $item): AbstractCommand
     {
         if (!$this->container->has($item)) {
-            throw new InvalidArgumentException();
+            throw new InvalidArgumentException($item);
         }
 
         return $this->container->get($item);

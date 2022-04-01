@@ -6,7 +6,6 @@ use BadMethodCallException;
 use Easy\Service\CommandListService;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Application as SymfonyApplication;
-
 use function call_user_func_array;
 use function is_callable;
 

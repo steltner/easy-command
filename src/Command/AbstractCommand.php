@@ -6,11 +6,9 @@ use Easy\Application;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Process\Process;
-
 use function array_flip;
 use function file_exists;
 use function strtolower;
-
 use const DS;
 use const PS;
 
@@ -81,9 +79,7 @@ abstract class AbstractCommand extends Command
 
     protected function getProjectByName(?string $name): ?array
     {
-        $config = $this->get('config');
-
-        $projects = $config['projects'];
+        $projects = $this->get('config.projects');
 
         if (isset($name)) {
             foreach ($projects as $project) {
