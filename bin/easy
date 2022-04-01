@@ -1,8 +1,8 @@
 #!/usr/bin/env php
 <?php
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
 set_time_limit(0);
@@ -31,7 +31,7 @@ foreach (
 
     $dependencies['services']['config'] = $config;
 
-    $container = new Laminas\ServiceManager\ServiceManager($dependencies);
+    $container = new Easy\ServiceManager($dependencies);
     $container->setService(Psr\Container\ContainerInterface::class, $container);
 
     (new Easy\Application($container, 'easy command'))->run();
